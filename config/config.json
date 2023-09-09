@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": null,
+    "database": "zacky_price_estimator_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "client_encoding": "UTF8"
+    }
+
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "zacky_price_estimator_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "client_encoding": "UTF8"
+    }
+  }
+}
