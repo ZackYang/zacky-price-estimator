@@ -1,10 +1,11 @@
 'use strict';
 
 const { Model } = require('sequelize');
-const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+    static saltRounds = 10;
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -17,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       // });
     }
 
-    static hashPassword(email, password) {
-      return crypto.pbkdf2Sync(password, email, 310000, 32, 'sha256').toString('base64');
+    static hashPassword(password) {
+      return bcrypt.hashSync(password, this.saltRounds);
     }
   }
 
@@ -47,7 +48,8 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.VIRTUAL,
       set(value) {
-        this.setDataValue('hashedPassword', User.hashPassword(value, this.email));
+        console.log(value)
+        this.setDataValue('hashedPassword', User.hashPassword(value));
       }
     }
   }, {
