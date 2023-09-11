@@ -45,6 +45,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING
     },
+    accessToken: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
     password: {
       type: DataTypes.VIRTUAL,
       set(value) {
