@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // this.hasMany(models.Portfolio, {
-      //   foreignKey: 'userId'
-      // });
+      this.hasMany(models.Portfolio, {
+        foreignKey: 'userId'
+      });
     }
 
     static hashPassword(password) {
