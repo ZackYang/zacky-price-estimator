@@ -19,7 +19,7 @@ const authenticatePassword = async (user, password) => {
 }
 
 const generateAccessToken = (email) => {
-  return jwt.sign(email, process.env.TOKEN_SECRET);
+  return jwt.sign({ email }, process.env.TOKEN_SECRET, { expiresIn: '1d' });
 }
 
 const findUserByEmail = async email => {
@@ -55,6 +55,14 @@ exports.login =  asyncHandler(async (req, res) => {
     res.status(401).json({ message: "Email or Password is incorrect." });
 });
 
-exports.logout = (req, res) => {
-
+exports.logout = async (req, res) => {
+  try {
+    req.user.accessToken = null;
+    await req.user.save();
+    res.status(200).send();
+  } catch(error) {
+    res.status(401).json({
+      error: error.message
+    });
+  }
 };
