@@ -28,6 +28,7 @@
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
+    "eslint": "^8.49.0",
     "sequelize-cli": "^6.6.1"
   }
 }
